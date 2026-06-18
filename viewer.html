@@ -14,7 +14,6 @@
     font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;}
 
   /* ===== 阅读底色主题 ===== */
-  body[data-rtheme="grey"]  { --stage-bg:#2b2b2b; --page-filter:none; }
   body[data-rtheme="white"] { --stage-bg:#f3f3f3; --page-filter:none; }
   body[data-rtheme="sepia"] { --stage-bg:#e8dcc0; --page-filter:sepia(.42) brightness(.98); }
   body[data-rtheme="night"] { --stage-bg:#000;     --page-filter:invert(1) hue-rotate(180deg); }
@@ -72,7 +71,7 @@
   .page-ind{font-size:14px;letter-spacing:.06em;min-width:74px;text-align:center;}
 </style>
 </head>
-<body data-rtheme="grey">
+<body data-rtheme="white">
   <div class="topbar">
     <a class="back" href="index.html">‹</a>
     <div class="ttl" id="ttl">在线阅读</div>
@@ -97,7 +96,6 @@
 (function(){
   // ===== 阅读底色主题 =====
   var RTHEMES = [
-    { key:'grey',  name:'深灰', dot:'#2b2b2b' },
     { key:'white', name:'纯白', dot:'#f3f3f3' },
     { key:'sepia', name:'护眼', dot:'#e8dcc0' },
     { key:'night', name:'夜间', dot:'#000000' }
@@ -116,8 +114,9 @@
     b.addEventListener('click', function(){ setRTheme(t.key); });
     palette.appendChild(b);
   });
-  var savedR='grey';
-  try { savedR=localStorage.getItem('reader-theme')||'grey'; } catch(e){}
+  var savedR='white';
+  try { savedR=localStorage.getItem('reader-theme')||'white'; } catch(e){}
+  if(!RTHEMES.some(function(t){ return t.key===savedR; })) savedR='white';
   setRTheme(savedR);
   paletteBtn.addEventListener('click', function(e){ e.stopPropagation(); palette.classList.toggle('show'); });
   document.addEventListener('click', function(){ palette.classList.remove('show'); });
