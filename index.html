@@ -6,9 +6,7 @@
 <title>支部组织生活 · 理论月读</title>
 <style>
   :root{
-    --red:#b21f1f;
-    --red-deep:#8a1414;
-    --gold:#d4af37;
+    --red:#b21f1f;--gold:#d4af37;
     --safe-top:env(safe-area-inset-top,0px);
     --safe-bottom:env(safe-area-inset-bottom,0px);
   }
@@ -21,23 +19,20 @@
     padding:calc(var(--safe-top) + 54px) 24px calc(var(--safe-bottom) + 40px);
     -webkit-font-smoothing:antialiased;
   }
-  .head{text-align:center;margin-bottom:40px;}
+  .head{text-align:center;margin-bottom:36px;}
   .emblem{font-size:54px;line-height:1;margin-bottom:18px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3));}
   .head h1{font-size:26px;font-weight:700;letter-spacing:.14em;margin-bottom:10px;}
   .head .sub{font-size:14px;letter-spacing:.3em;color:rgba(255,255,255,.78);padding-left:.3em;}
   .head .line{width:46px;height:3px;background:var(--gold);margin:18px auto 0;border-radius:2px;}
-
   .tip{font-size:13px;color:rgba(255,255,255,.7);text-align:center;margin-bottom:18px;letter-spacing:.05em;}
 
   .list{display:flex;flex-direction:column;gap:18px;max-width:520px;margin:0 auto;}
   .card{
     display:flex;align-items:center;gap:16px;
     background:rgba(255,255,255,.97);color:#2a2a2a;
-    border-radius:18px;padding:20px 18px;
-    text-decoration:none;
+    border-radius:18px;padding:20px 18px;text-decoration:none;
     box-shadow:0 12px 30px rgba(0,0,0,.28);
-    border:1px solid rgba(212,175,55,.5);
-    transition:transform .12s ease;
+    border:1px solid rgba(212,175,55,.5);transition:transform .12s ease;
   }
   .card:active{transform:scale(.98);}
   .ico{
@@ -55,6 +50,7 @@
   .meta .d{font-size:12.5px;color:#8a8a8a;letter-spacing:.04em;}
   .arrow{flex:0 0 auto;color:var(--red);font-size:22px;font-weight:700;}
 
+  .empty{text-align:center;color:rgba(255,255,255,.8);font-size:14px;margin-top:30px;}
   .foot{text-align:center;margin-top:36px;font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.1em;}
 </style>
 </head>
@@ -67,27 +63,30 @@
   </div>
 
   <div class="tip">请选择要查看的月份</div>
-
-  <div class="list">
-    <a class="card" href="2026-03.pdf">
-      <div class="ico"><span class="m">3</span><span class="u">月</span></div>
-      <div class="meta">
-        <div class="t">【2026年3月】支部组织生活理论月读</div>
-        <div class="d">点击查看 · PDF 文档</div>
-      </div>
-      <div class="arrow">›</div>
-    </a>
-
-    <a class="card" href="2026-04.pdf">
-      <div class="ico"><span class="m">4</span><span class="u">月</span></div>
-      <div class="meta">
-        <div class="t">【2026年4月】支部组织生活理论月读</div>
-        <div class="d">点击查看 · PDF 文档</div>
-      </div>
-      <div class="arrow">›</div>
-    </a>
-  </div>
-
+  <div class="list" id="list"></div>
   <div class="foot">2026 · 支部组织生活理论月读</div>
+
+<script>
+fetch('books.json?_=' + Date.now())
+  .then(function(r){ return r.json(); })
+  .then(function(books){
+    var list = document.getElementById('list');
+    if(!books.length){ list.innerHTML = '<div class="empty">暂无内容</div>'; return; }
+    books.forEach(function(b){
+      var a = document.createElement('a');
+      a.className = 'card';
+      a.href = 'viewer.html?f=' + encodeURIComponent(b.file) + '&t=' + encodeURIComponent(b.title);
+      a.innerHTML =
+        '<div class="ico"><span class="m">' + b.badge + '</span><span class="u">月</span></div>' +
+        '<div class="meta"><div class="t">' + b.title + '</div>' +
+        '<div class="d">点击在线阅读 · PDF</div></div>' +
+        '<div class="arrow">›</div>';
+      list.appendChild(a);
+    });
+  })
+  .catch(function(){
+    document.getElementById('list').innerHTML = '<div class="empty">加载失败，请刷新重试</div>';
+  });
+</script>
 </body>
 </html>
