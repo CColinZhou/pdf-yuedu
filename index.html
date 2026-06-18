@@ -6,98 +6,55 @@
 <title>支部组织生活 · 理论月读</title>
 <style>
   :root{
+    --red:#b21f1f;--gold:#d4af37;
     --safe-top:env(safe-area-inset-top,0px);
     --safe-bottom:env(safe-area-inset-bottom,0px);
   }
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-
-  /* ===== 主题定义 ===== */
-  body[data-theme="red"]{
-    --bg:linear-gradient(160deg,#9e1b1b 0%,#7a1010 55%,#5e0c0c 100%);
-    --fg:#fff;--sub:rgba(255,255,255,.8);--line:#d4af37;
-    --card-bg:rgba(255,255,255,.97);--card-fg:#2a2a2a;--card-sub:#8a8a8a;
-    --accent:#b21f1f;--ico:linear-gradient(150deg,#c62828,#8a1414);
-    --badge:#d4af37;--badge-fg:#5e0c0c;--foot:rgba(255,255,255,.55);
-  }
-  body[data-theme="blue"]{
-    --bg:linear-gradient(160deg,#1b3a6b 0%,#142a52 55%,#0e1d3a 100%);
-    --fg:#fff;--sub:rgba(255,255,255,.8);--line:#e0c060;
-    --card-bg:rgba(255,255,255,.97);--card-fg:#23314a;--card-sub:#8a93a3;
-    --accent:#1b3a6b;--ico:linear-gradient(150deg,#2e5aa0,#142a52);
-    --badge:#e0c060;--badge-fg:#0e1d3a;--foot:rgba(255,255,255,.55);
-  }
-  body[data-theme="dark"]{
-    --bg:linear-gradient(160deg,#2a2a2e 0%,#1c1c1f 55%,#121214 100%);
-    --fg:#f1ead7;--sub:rgba(241,234,215,.7);--line:#c2a35a;
-    --card-bg:#26262a;--card-fg:#ececec;--card-sub:#9a9a9e;
-    --accent:#c2a35a;--ico:linear-gradient(150deg,#4a4a52,#2a2a2e);
-    --badge:#c2a35a;--badge-fg:#1c1c1f;--foot:rgba(241,234,215,.45);
-  }
-  body[data-theme="paper"]{
-    --bg:radial-gradient(120% 90% at 50% 0%, #f7f1e3 0%, #ece2cd 100%);
-    --fg:#4a3b28;--sub:#8a7a5e;--line:#c2683f;
-    --card-bg:#fffdf8;--card-fg:#33302b;--card-sub:#a89a82;
-    --accent:#c2683f;--ico:linear-gradient(150deg,#d98b5f,#b85a30);
-    --badge:#c2683f;--badge-fg:#fff;--foot:rgba(74,59,40,.5);
-  }
-  body[data-theme="green"]{
-    --bg:linear-gradient(160deg,#1f5e44 0%,#164534 55%,#0f3025 100%);
-    --fg:#fff;--sub:rgba(255,255,255,.8);--line:#e0c060;
-    --card-bg:rgba(255,255,255,.97);--card-fg:#234034;--card-sub:#8aa399;
-    --accent:#1f5e44;--ico:linear-gradient(150deg,#2e8060,#164534);
-    --badge:#e0c060;--badge-fg:#0f3025;--foot:rgba(255,255,255,.55);
-  }
-
   body{
     min-height:100vh;
     font-family:-apple-system,"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
-    background:var(--bg);color:var(--fg);
-    padding:calc(var(--safe-top) + 44px) 24px calc(var(--safe-bottom) + 40px);
-    -webkit-font-smoothing:antialiased;transition:background .35s ease,color .35s ease;
+    background:linear-gradient(160deg,#9e1b1b 0%,#7a1010 55%,#5e0c0c 100%);
+    color:#fff;
+    padding:calc(var(--safe-top) + 54px) 24px calc(var(--safe-bottom) + 40px);
+    -webkit-font-smoothing:antialiased;
   }
-  .head{text-align:center;margin-bottom:22px;}
+  .head{text-align:center;margin-bottom:36px;}
   .emblem{font-size:54px;line-height:1;margin-bottom:18px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3));}
   .head h1{font-size:26px;font-weight:700;letter-spacing:.14em;margin-bottom:10px;}
-  .head .sub{font-size:14px;letter-spacing:.3em;color:var(--sub);padding-left:.3em;}
-  .head .line{width:46px;height:3px;background:var(--line);margin:18px auto 0;border-radius:2px;}
+  .head .sub{font-size:14px;letter-spacing:.3em;color:rgba(255,255,255,.78);padding-left:.3em;}
+  .head .line{width:46px;height:3px;background:var(--gold);margin:18px auto 0;border-radius:2px;}
+  .tip{font-size:13px;color:rgba(255,255,255,.7);text-align:center;margin-bottom:18px;letter-spacing:.05em;}
 
-  /* ===== 主题切换条 ===== */
-  .themebar{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:26px;}
-  .themebar .lbl{font-size:12px;letter-spacing:.2em;color:var(--sub);padding-left:.2em;}
-  .sw{width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.35);
-    cursor:pointer;padding:0;outline:none;transition:transform .12s ease;}
-  .sw:active{transform:scale(.9);}
-  .sw.on{border-color:var(--line);box-shadow:0 0 0 3px rgba(255,255,255,.18);transform:scale(1.12);}
-
-  .tip{font-size:13px;color:var(--sub);text-align:center;margin-bottom:18px;letter-spacing:.05em;}
   .list{display:flex;flex-direction:column;gap:18px;max-width:520px;margin:0 auto;}
   .card{
     display:flex;align-items:center;gap:16px;
-    background:var(--card-bg);color:var(--card-fg);
+    background:rgba(255,255,255,.97);color:#2a2a2a;
     border-radius:18px;padding:20px 18px;text-decoration:none;
     box-shadow:0 12px 30px rgba(0,0,0,.28);
-    border:1px solid rgba(255,255,255,.12);transition:transform .12s ease;
+    border:1px solid rgba(212,175,55,.5);transition:transform .12s ease;
   }
   .card:active{transform:scale(.98);}
   .ico{
-    flex:0 0 56px;height:70px;border-radius:8px;background:var(--ico);
+    flex:0 0 56px;height:70px;border-radius:8px;
+    background:linear-gradient(150deg,#c62828,#8a1414);
     display:flex;flex-direction:column;align-items:center;justify-content:center;
-    color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.3);position:relative;
+    color:#fff;box-shadow:0 4px 12px rgba(138,20,20,.4);position:relative;
   }
   .ico .m{font-size:24px;font-weight:800;line-height:1;}
   .ico .u{font-size:11px;letter-spacing:.1em;margin-top:3px;opacity:.9;}
   .ico::after{content:"PDF";position:absolute;bottom:-1px;font-size:8px;letter-spacing:.08em;
-    background:var(--badge);color:var(--badge-fg);font-weight:700;padding:1px 5px;border-radius:3px 3px 0 0;}
+    background:var(--gold);color:#5e0c0c;font-weight:700;padding:1px 5px;border-radius:3px 3px 0 0;}
   .meta{flex:1;min-width:0;}
   .meta .t{font-size:17px;font-weight:600;line-height:1.4;margin-bottom:5px;}
-  .meta .d{font-size:12.5px;color:var(--card-sub);letter-spacing:.04em;}
-  .arrow{flex:0 0 auto;color:var(--accent);font-size:22px;font-weight:700;}
+  .meta .d{font-size:12.5px;color:#8a8a8a;letter-spacing:.04em;}
+  .arrow{flex:0 0 auto;color:var(--red);font-size:22px;font-weight:700;}
 
-  .empty{text-align:center;color:var(--sub);font-size:14px;margin-top:30px;}
-  .foot{text-align:center;margin-top:36px;font-size:12px;color:var(--foot);letter-spacing:.1em;}
+  .empty{text-align:center;color:rgba(255,255,255,.8);font-size:14px;margin-top:30px;}
+  .foot{text-align:center;margin-top:36px;font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.1em;}
 </style>
 </head>
-<body data-theme="red">
+<body>
   <div class="head">
     <div class="emblem">📕</div>
     <h1>支部组织生活</h1>
@@ -105,60 +62,31 @@
     <div class="line"></div>
   </div>
 
-  <div class="themebar" id="themebar"><span class="lbl">主题</span></div>
-
   <div class="tip">请选择要查看的月份</div>
   <div class="list" id="list"></div>
   <div class="foot">2026 · 支部组织生活理论月读</div>
 
 <script>
-  // ===== 主题切换 =====
-  var THEMES = [
-    { key:'red',   name:'党建红', dot:'#b21f1f' },
-    { key:'blue',  name:'沉稳蓝', dot:'#1b3a6b' },
-    { key:'dark',  name:'静夜黑', dot:'#1c1c1f' },
-    { key:'paper', name:'米黄纸', dot:'#e7d8b6' },
-    { key:'green', name:'松石绿', dot:'#1f5e44' }
-  ];
-  var bar = document.getElementById('themebar');
-  function setTheme(k){
-    document.body.setAttribute('data-theme', k);
-    try { localStorage.setItem('pdf-theme', k); } catch(e){}
-    bar.querySelectorAll('.sw').forEach(function(s){ s.classList.toggle('on', s.dataset.k===k); });
-  }
-  var saved = 'red';
-  try { saved = localStorage.getItem('pdf-theme') || 'red'; } catch(e){}
-  THEMES.forEach(function(t){
-    var b = document.createElement('button');
-    b.className = 'sw'; b.dataset.k = t.key; b.title = t.name;
-    b.style.background = t.dot;
-    b.setAttribute('aria-label', t.name);
-    b.addEventListener('click', function(){ setTheme(t.key); });
-    bar.appendChild(b);
-  });
-  setTheme(saved);
-
-  // ===== 列表 =====
-  fetch('books.json?_=' + Date.now())
-    .then(function(r){ return r.json(); })
-    .then(function(books){
-      var list = document.getElementById('list');
-      if(!books.length){ list.innerHTML = '<div class="empty">暂无内容</div>'; return; }
-      books.forEach(function(b){
-        var a = document.createElement('a');
-        a.className = 'card';
-        a.href = 'viewer.html?f=' + encodeURIComponent(b.file) + '&t=' + encodeURIComponent(b.title);
-        a.innerHTML =
-          '<div class="ico"><span class="m">' + b.badge + '</span><span class="u">月</span></div>' +
-          '<div class="meta"><div class="t">' + b.title + '</div>' +
-          '<div class="d">点击在线阅读 · PDF</div></div>' +
-          '<div class="arrow">›</div>';
-        list.appendChild(a);
-      });
-    })
-    .catch(function(){
-      document.getElementById('list').innerHTML = '<div class="empty">加载失败，请刷新重试</div>';
+fetch('books.json?_=' + Date.now())
+  .then(function(r){ return r.json(); })
+  .then(function(books){
+    var list = document.getElementById('list');
+    if(!books.length){ list.innerHTML = '<div class="empty">暂无内容</div>'; return; }
+    books.forEach(function(b){
+      var a = document.createElement('a');
+      a.className = 'card';
+      a.href = 'viewer.html?f=' + encodeURIComponent(b.file) + '&t=' + encodeURIComponent(b.title);
+      a.innerHTML =
+        '<div class="ico"><span class="m">' + b.badge + '</span><span class="u">月</span></div>' +
+        '<div class="meta"><div class="t">' + b.title + '</div>' +
+        '<div class="d">点击在线阅读 · PDF</div></div>' +
+        '<div class="arrow">›</div>';
+      list.appendChild(a);
     });
+  })
+  .catch(function(){
+    document.getElementById('list').innerHTML = '<div class="empty">加载失败，请刷新重试</div>';
+  });
 </script>
 </body>
 </html>
