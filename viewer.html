@@ -91,7 +91,7 @@
     <button class="nav" id="next">›</button>
   </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdn.staticfile.org/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
 (function(){
   // ===== 阅读底色主题 =====
@@ -139,7 +139,7 @@
 
   if(!file){ loadingEl.className='error'; loadingEl.innerHTML='缺少文件参数'; return; }
   if(!window.pdfjsLib){ loadingEl.className='error'; loadingEl.innerHTML='阅读器加载失败，请检查网络后刷新'; return; }
-  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.staticfile.org/pdf.js/3.11.174/pdf.worker.min.js';
 
   var pdfDoc=null, pageNum=1, rendering=false, pending=null;
   function render(num){
@@ -180,7 +180,12 @@
     if(Math.abs(dx)>60 && Math.abs(dx)>Math.abs(dy)*1.5){ go(dx<0 ? 1 : -1); }
   });
 
-  pdfjsLib.getDocument(file).promise.then(function(doc){
+  var task = pdfjsLib.getDocument({ url:file, disableAutoFetch:true, disableStream:false, rangeChunkSize:65536 });
+  task.onProgress = function(p){
+    if(loadingEl.style.display==='none') return;
+    if(p && p.total){ loadingEl.textContent='正在加载… ' + Math.min(99, Math.floor(p.loaded/p.total*100)) + '%'; }
+  };
+  task.promise.then(function(doc){
     pdfDoc=doc; render(pageNum);
   }).catch(function(){
     loadingEl.className='error';
